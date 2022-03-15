@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Hussein_Files/Programming_Projects/android/2022-01-01/adbwifi/app/src/main/res/drawable/ic_off.xml" value="0.1" />
+        <entry key="..\:/Hussein_Files/Programming_Projects/android/2022-01-01/adbwifi/app/src/main/res/drawable/ic_on.xml" value="0.1" />
+        <entry key="..\:/Hussein_Files/Programming_Projects/android/2022-01-01/adbwifi/app/src/main/res/layout/activity_main.xml" value="0.12" />
+        <entry key="..\:/Hussein_Files/Programming_Projects/android/2022-01-01/adbwifi/app/src/main/res/layout/main.xml" value="0.12" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
