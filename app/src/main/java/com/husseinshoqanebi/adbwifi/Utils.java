@@ -43,7 +43,7 @@ public class Utils {
 			dataOutputStream.writeBytes("exit" + NEW_LINE);
 			dataOutputStream.flush();
 			process.waitFor();
-			return process.exitValue() != 255;
+			return process.exitValue() == 0;
 		} catch (Exception e) {
 			return false;
 		}
