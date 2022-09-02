@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Thumb of the ADB toggle: a 94dp circle inset 8dp, filling the 110dp track height. -->
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+	android:inset="@dimen/_8dp">
+	<shape android:shape="oval">
+		<size android:width="@dimen/_94dp" android:height="@dimen/_94dp" />
+		<solid android:color="@color/white" />
+	</shape>
+</inset>

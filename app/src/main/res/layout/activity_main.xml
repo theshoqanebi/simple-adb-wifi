@@ -30,12 +30,15 @@
 		android:layout_height="match_parent"
 		android:layout_below="@id/header">
 
-		<ImageView
+		<androidx.appcompat.widget.SwitchCompat
+			xmlns:app="http://schemas.android.com/apk/res-auto"
 			android:id="@+id/status"
-			android:layout_width="@dimen/_220dp"
-			android:layout_height="@dimen/_110dp"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
 			android:layout_centerInParent="true"
-			android:src="@drawable/ic_off" />
+			android:contentDescription="@string/title"
+			android:thumb="@drawable/switch_thumb"
+			app:track="@drawable/switch_track" />
 
 		<TextView
 			android:id="@+id/hint"

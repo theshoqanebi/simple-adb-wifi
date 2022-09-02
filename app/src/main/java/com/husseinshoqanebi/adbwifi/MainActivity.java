@@ -3,7 +3,7 @@ package com.husseinshoqanebi.adbwifi;
 import android.content.IntentFilter;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,12 +18,14 @@ public class MainActivity extends AppCompatActivity {
 	private final WifiStateReceiver wifiStateReceiver = new WifiStateReceiver();
 	ActivityMainBinding binding;
 	private boolean toggleStatus = false;
+	private boolean updatingToggle = false;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		binding = ActivityMainBinding.inflate(getLayoutInflater());
 		setContentView(binding.getRoot());
+		binding.status.setOnCheckedChangeListener(new ToggleChangeListener());
 
 		wifiStateReceiver.setOnEventListener(new OnEventListener() {
 			@Override
@@ -58,23 +60,24 @@ public class MainActivity extends AppCompatActivity {
 
 	private void resetToggleStatus() {
 		setToggleStatus(Utils.getAdbStatus());
-		binding.status.setOnClickListener(new ToggleClickListener());
+		binding.status.setEnabled(true);
 	}
 
 	private void lockToggle() {
 		Utils.setAdbWifiStatus(false);
 		setToggleStatus(false);
 		binding.hint.setText(R.string.wifi_off);
-		binding.status.setOnClickListener(null);
+		binding.status.setEnabled(false);
 	}
 
 	private void setToggleStatus(boolean status) {
 		toggleStatus = status;
+		updatingToggle = true;
+		binding.status.setChecked(status);
+		updatingToggle = false;
 		if (!status) {
-			binding.status.setImageResource(R.drawable.ic_off);
 			binding.hint.setText("");
 		} else {
-			binding.status.setImageResource(R.drawable.ic_on);
 			new Thread(() -> {
 				try (Socket socket = new Socket()) {
 					socket.connect(new InetSocketAddress("8.8.8.8", 80));
@@ -96,14 +99,16 @@ public class MainActivity extends AppCompatActivity {
 		Toast.makeText(getApplicationContext(), resource, Toast.LENGTH_SHORT).show();
 	}
 
-	private class ToggleClickListener implements View.OnClickListener {
+	private class ToggleChangeListener implements CompoundButton.OnCheckedChangeListener {
 		@Override
-		public void onClick(View v) {
+		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+			if (updatingToggle) {
+				return;
+			}
 			if (Utils.isWifiConnected(MainActivity.this)) {
-				boolean ret = Utils.setAdbWifiStatus(!toggleStatus);
+				boolean ret = Utils.setAdbWifiStatus(isChecked);
 				if (ret) {
-					toggleStatus = !toggleStatus;
-					setToggleStatus(toggleStatus);
+					setToggleStatus(isChecked);
 
 					if (toggleStatus) {
 						showMessage(R.string.service_started);
@@ -111,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
 						showMessage(R.string.service_stoped);
 					}
 				} else {
+					setToggleStatus(toggleStatus);
 					showMessage(R.string.error_message);
 				}
 			} else {
