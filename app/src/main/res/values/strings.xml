@@ -1,11 +1,15 @@
 <resources>
-	<string name="app_name">adb wifi</string>
-	<string name="off">OFF</string>
-	<string name="on">ON</string>
-	<string name="wifi_off">wifi is not connected</string>
-	<string name="title">ADB OVER WIFI</string>
-	<string name="hint_example">adb connect 192.168.0.198:5555</string>
-	<string name="service_started">adb wifi service started</string>
-	<string name="service_stoped">adb wifi service stopped</string>
-	<string name="error_message">"Something went wrong</string>
+    <string name="app_name">adb wifi</string>
+    <string name="off">OFF</string>
+    <string name="on">ON</string>
+    <string name="wifi_off">wifi is not connected</string>
+    <string name="title">ADB OVER WIFI</string>
+    <string name="hint_example">adb connect 192.168.0.198:5555</string>
+    <string name="service_started">adb wifi service started</string>
+    <string name="service_stoped">adb wifi service stopped</string>
+    <string name="error_message">Something went wrong</string>
+    <string name="rootless">Rootless Method</string>
+    <string name="rootless_error">"Don't have root? click to check rootless method"</string>
+    <string name="developer_options_button">Open developer options</string>
+    <string name="developer_options_error">"Can't open developer options"</string>
 </resources>

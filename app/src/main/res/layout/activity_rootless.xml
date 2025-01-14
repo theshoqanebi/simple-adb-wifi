@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/layout_background"
+    android:textDirection="ltr"
+    tools:context="com.theshoqanebi.adbwifi.MainActivity">
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_44dp"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/_8dp"
+            android:paddingEnd="@dimen/_8dp"
+            android:text="@string/rootless"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/header">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/_8dp"
+            android:paddingEnd="@dimen/_8dp"
+            android:id="@+id/content">
+
+            <TextView
+                android:id="@+id/steps"
+                android:layout_marginTop="@dimen/_8dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <Button
+                android:id="@+id/openDeveloper"
+                android:layout_below="@id/steps"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="@string/developer_options_button"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/_8dp"
+                android:layout_marginTop="@dimen/_4dp"/>
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>
