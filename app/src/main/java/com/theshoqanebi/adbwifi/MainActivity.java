@@ -1,6 +1,7 @@
 package com.theshoqanebi.adbwifi;
 
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.material.color.MaterialColors;
 import com.theshoqanebi.adbwifi.databinding.ActivityMainBinding;
 
 import java.io.IOException;
@@ -29,6 +31,10 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        int dynamicColor = MaterialColors.getColor(this, com.google.android.material.R.attr.colorPrimary, Color.BLACK);
+        getWindow().setStatusBarColor(dynamicColor);
+
         ViewCompat.setOnApplyWindowInsetsListener(binding.getRoot(), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
