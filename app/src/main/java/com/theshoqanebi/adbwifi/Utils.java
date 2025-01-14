@@ -2,6 +2,8 @@ package com.theshoqanebi.adbwifi;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
 import android.net.NetworkInfo.State;
 import android.widget.Toast;
 
@@ -18,9 +20,17 @@ public class Utils {
     private static final String NEW_LINE = "\n";
 
     public static boolean isWifiConnected(Context context) {
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        State state = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState();
-        return state == State.CONNECTED;
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager != null) {
+            Network activeNetwork = connectivityManager.getActiveNetwork();
+            if (activeNetwork != null) {
+                NetworkCapabilities networkCapabilities = connectivityManager.getNetworkCapabilities(activeNetwork);
+                if (networkCapabilities != null) {
+                    return networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI);
+                }
+            }
+        }
+        return false;
     }
 
     public static boolean getAdbStatus(Context context) {
