@@ -1,6 +1,7 @@
 package com.theshoqanebi.adbwifi;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
@@ -64,11 +65,13 @@ public class Utils {
         }
     }
 
-    public static boolean setAdbWifiStatus(boolean status) {
+    public static boolean setAdbWifiStatus(boolean status, Context context) {
+        SharedPreferences preferences = context.getSharedPreferences("PORT", Context.MODE_PRIVATE);
+        String PORT = preferences.getString("port", String.valueOf(DEFAULT_PORT));
         try {
             Process process = Runtime.getRuntime().exec("su");
             DataOutputStream dataOutputStream = new DataOutputStream(process.getOutputStream());
-            dataOutputStream.writeBytes("setprop service.adb.tcp.port " + DEFAULT_PORT + NEW_LINE);
+            dataOutputStream.writeBytes("setprop service.adb.tcp.port " + PORT + NEW_LINE);
             if (status) {
                 dataOutputStream.writeBytes("start adbd" + NEW_LINE);
             } else {
