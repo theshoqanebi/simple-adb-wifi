@@ -1,5 +1,6 @@
 package com.theshoqanebi.adbwifi;
 
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
 import android.net.wifi.WifiManager;
@@ -40,6 +41,16 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        boolean isRooted = Utils.isDeviceRooted();
+        if (!isRooted) {
+            binding.hint.setOnClickListener(v -> {
+                startActivity(new Intent(getApplicationContext(), RootlessActivity.class));
+            });
+            binding.hint.setText(getString(R.string.rootless_error));
+            binding.hint.setTextColor(getColor(R.color.colorPrimary));
+            return;
+        }
 
         wifiStateReceiver.setOnEventListener(new OnEventListener() {
             @Override

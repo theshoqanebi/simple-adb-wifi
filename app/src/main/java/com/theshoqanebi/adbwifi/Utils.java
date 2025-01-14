@@ -51,6 +51,19 @@ public class Utils {
         return false;
     }
 
+    public static boolean isDeviceRooted() {
+        try {
+            Process process = Runtime.getRuntime().exec("su");
+            DataOutputStream dataOutputStream = new DataOutputStream(process.getOutputStream());
+            dataOutputStream.writeBytes("exit");
+            dataOutputStream.flush();
+            process.waitFor();
+            return process.exitValue() == 0;
+        }catch (Exception e) {
+            return false;
+        }
+    }
+
     public static boolean setAdbWifiStatus(boolean status) {
         try {
             Process process = Runtime.getRuntime().exec("su");
