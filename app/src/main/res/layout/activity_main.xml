@@ -20,9 +20,17 @@
 			android:paddingStart="@dimen/_8dp"
 			android:paddingEnd="@dimen/_8dp"
 			android:text="@string/title"
+			android:layout_toStartOf="@id/settings"
 			android:textColor="@color/white"
 			android:textSize="16sp"
 			android:textStyle="bold" />
+		<ImageView
+			android:id="@+id/settings"
+			android:layout_width="?actionBarSize"
+			android:layout_height="match_parent"
+			android:src="@drawable/ic_settings"
+			android:padding="@dimen/_4sp"
+			android:layout_alignParentEnd="true" />
 	</RelativeLayout>
 
 	<RelativeLayout

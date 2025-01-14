@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/layout_background"
+    android:textDirection="ltr"
+    tools:context="com.theshoqanebi.adbwifi.MainActivity">
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_44dp"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/_8dp"
+            android:paddingEnd="@dimen/_8dp"
+            android:text="@string/settings"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/header">
+
+        <RelativeLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/_8dp"
+            android:paddingEnd="@dimen/_8dp">
+
+            <TextView
+                android:id="@+id/settings1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_4dp"
+                android:layout_marginTop="@dimen/_8dp"
+                android:text="@string/settings_1"
+                android:textSize="@dimen/_12sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/settings1Values"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_38dp"
+                android:layout_below="@id/settings1"
+                android:layout_marginTop="@dimen/_2dp"
+                android:background="@drawable/port_text"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:padding="@dimen/_4dp"
+                android:text="@string/default_port" />
+
+
+            <TextView
+                android:id="@+id/settings2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/settings1Values"
+                android:layout_marginStart="@dimen/_4dp"
+                android:layout_marginTop="@dimen/_8dp"
+                android:text="@string/settings_2"
+                android:textSize="@dimen/_12sp"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:id="@+id/settings2Values"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/settings2">
+
+                <RadioButton
+                    android:id="@+id/settings2Value1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/root_1" />
+
+                <RadioButton
+                    android:id="@+id/settings2Value2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/root_2" />
+            </RadioGroup>
+
+            <RelativeLayout
+                android:id="@+id/rootChecker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/settings2Values"
+                android:background="@drawable/border">
+
+                <ImageView
+                    android:id="@+id/rootStatusImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_restore" />
+
+                <TextView
+                    android:id="@+id/rootStatusText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/rootStatusImage"
+                    android:fontFamily="casual"
+                    android:gravity="center"
+                    android:text="@string/check"
+                    android:textSize="@dimen/_24sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>
