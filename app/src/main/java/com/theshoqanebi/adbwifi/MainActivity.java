@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void resetToggleStatus() {
-        setToggleStatus(Utils.getAdbStatus());
+        setToggleStatus(Utils.getAdbStatus(getApplicationContext()));
         binding.status.setOnClickListener(new ToggleClickListener());
     }
 
