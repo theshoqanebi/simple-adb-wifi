@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.WifiManager;
 
+import java.util.Objects;
+
 public class WifiStateReceiver extends BroadcastReceiver {
     private OnEventListener onEventListener;
 
@@ -14,7 +16,7 @@ public class WifiStateReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (intent.getAction().equals(WifiManager.SUPPLICANT_CONNECTION_CHANGE_ACTION)) {
+        if (Objects.equals(intent.getAction(), WifiManager.SUPPLICANT_CONNECTION_CHANGE_ACTION)) {
             if (!intent.getBooleanExtra(WifiManager.EXTRA_SUPPLICANT_CONNECTED, false)) {
                 if (onEventListener != null) {
                     onEventListener.onDisabled();
