@@ -3,6 +3,7 @@ package com.theshoqanebi.adbwifi;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo.State;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -22,7 +23,7 @@ public class Utils {
         return state == State.CONNECTED;
     }
 
-    public static boolean getAdbStatus() {
+    public static boolean getAdbStatus(Context context) {
         try {
             Process process = Runtime.getRuntime().exec("getprop init.svc.adbd");
             InputStream inputStream = process.getInputStream();
@@ -35,7 +36,7 @@ public class Utils {
             reader.close();
             return result.toString().trim().equals("running");
         } catch (Exception e) {
-            e.printStackTrace();
+            Toast.makeText(context, "Make sure you have root access", Toast.LENGTH_SHORT).show();
         }
         return false;
     }
