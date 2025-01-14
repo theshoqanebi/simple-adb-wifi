@@ -1,4 +1,4 @@
-package com.husseinshoqanebi.adbwifi;
+package com.theshoqanebi.adbwifi;
 
 import android.content.IntentFilter;
 import android.net.wifi.WifiManager;
@@ -8,7 +8,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.husseinshoqanebi.adbwifi.databinding.ActivityMainBinding;
+import com.theshoqanebi.adbwifi.databinding.ActivityMainBinding;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;

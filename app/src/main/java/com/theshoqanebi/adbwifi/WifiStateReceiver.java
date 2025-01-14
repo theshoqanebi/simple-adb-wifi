@@ -1,4 +1,4 @@
-package com.husseinshoqanebi.adbwifi;
+package com.theshoqanebi.adbwifi;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
