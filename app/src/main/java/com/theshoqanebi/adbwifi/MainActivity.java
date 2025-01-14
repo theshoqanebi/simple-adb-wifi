@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
     private boolean toggleStatus = false;
     private boolean updatingToggle = false;
+    boolean isRooted = Utils.isDeviceRooted();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,10 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        boolean isRooted = Utils.isDeviceRooted();
+        binding.settings.setOnClickListener(v -> {
+            startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+        });
+
         if (!isRooted) {
             binding.hint.setOnClickListener(v -> {
                 startActivity(new Intent(getApplicationContext(), RootlessActivity.class));
