@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void lockToggle() {
-        Utils.setAdbWifiStatus(false);
+        Utils.setAdbWifiStatus(false, getApplicationContext());
         setToggleStatus(false);
         binding.hint.setText(R.string.wifi_off);
         binding.status.setOnClickListener(null);
@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             if (Utils.isWifiConnected(MainActivity.this)) {
-                boolean ret = Utils.setAdbWifiStatus(!toggleStatus);
+                boolean ret = Utils.setAdbWifiStatus(!toggleStatus, getApplicationContext());
                 if (ret) {
                     toggleStatus = !toggleStatus;
                     setToggleStatus(toggleStatus);
