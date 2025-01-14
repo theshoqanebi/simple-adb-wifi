@@ -1,4 +1,4 @@
-package com.husseinshoqanebi.adbwifi;
+package com.theshoqanebi.adbwifi;
 
 public interface OnEventListener {
 	void onEnabled();

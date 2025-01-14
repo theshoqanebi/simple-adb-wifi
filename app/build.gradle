@@ -4,9 +4,9 @@ plugins {
 
 android {
     compileSdk 35
-    namespace "com.husseinshoqanebi.adbwifi"
+    namespace "com.theshoqanebi.adbwifi"
     defaultConfig {
-        applicationId "com.husseinshoqanebi.adbwifi"
+        applicationId "com.theshoqanebi.adbwifi"
         minSdk 21
         targetSdk 35
         versionCode 1
