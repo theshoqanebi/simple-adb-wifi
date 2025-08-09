@@ -1,15 +1,11 @@
 package com.theshoqanebi.adbwifi;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.RadioGroup;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -47,24 +43,9 @@ public class SettingsActivity extends AppCompatActivity {
                 binding.settings1Values.setText(preferences.getString("port", "5555"));
             });
         });
-
-        binding.settings2Values.setOnCheckedChangeListener((group, checkedId) -> {
-            if (binding.settings2Value1.isChecked()) {
-                preferences.edit().putInt("su", 1).apply();
-            } else {
-                preferences.edit().putInt("su", 2).apply();
-            }
-        });
     }
 
     private void viewPrepare() {
         binding.settings1Values.setText(preferences.getString("port", "5555"));
-        if (preferences.getInt("su", 1) == 1) {
-            binding.settings2Value1.setChecked(true);
-            binding.settings2Value2.setChecked(false);
-        } else {
-            binding.settings2Value1.setChecked(false);
-            binding.settings2Value2.setChecked(true);
-        }
     }
 }

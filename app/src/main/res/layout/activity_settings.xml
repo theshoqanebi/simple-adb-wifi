@@ -60,42 +60,12 @@
                 android:padding="@dimen/_4dp"
                 android:text="@string/default_port" />
 
-
-            <TextView
-                android:id="@+id/settings2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/settings1Values"
-                android:layout_marginStart="@dimen/_4dp"
-                android:layout_marginTop="@dimen/_8dp"
-                android:text="@string/settings_2"
-                android:textSize="@dimen/_12sp"
-                android:textStyle="bold" />
-
-            <RadioGroup
-                android:id="@+id/settings2Values"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/settings2">
-
-                <RadioButton
-                    android:id="@+id/settings2Value1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/root_1" />
-
-                <RadioButton
-                    android:id="@+id/settings2Value2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/root_2" />
-            </RadioGroup>
-
             <RelativeLayout
                 android:id="@+id/rootChecker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/settings2Values"
+                android:layout_below="@id/settings1Values"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/border">
 
                 <ImageView
