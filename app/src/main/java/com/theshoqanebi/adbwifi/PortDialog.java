@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -53,7 +52,7 @@ public class PortDialog extends Dialog {
                     binding.port.setBackground(AppCompatResources.getDrawable(activity, R.drawable.port_text_error));
                     binding.save.setClickable(false);
                 } else {
-                    binding.port.setBackground(AppCompatResources.getDrawable(activity,R.drawable.port_text));
+                    binding.port.setBackground(AppCompatResources.getDrawable(activity, R.drawable.port_text));
                     binding.save.setClickable(true);
                 }
             }
