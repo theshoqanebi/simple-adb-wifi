@@ -1,23 +1,50 @@
 <resources>
     <string name="app_name">adb wifi</string>
-    <string name="off">OFF</string>
-    <string name="on">ON</string>
-    <string name="wifi_off">wifi is not connected</string>
-    <string name="title">ADB OVER WIFI</string>
-    <string name="hint_example">adb connect 192.168.0.198:5555</string>
-    <string name="service_started">adb wifi service started</string>
-    <string name="service_stoped">adb wifi service stopped</string>
-    <string name="error_message">Something went wrong</string>
-    <string name="rootless">Rootless Method</string>
-    <string name="rootless_error">"Don't have root? click to check rootless method"</string>
-    <string name="developer_options_button">Open developer options</string>
-    <string name="developer_options_error">"Can't open developer options"</string>
-    <string name="settings_2">Root Method:</string>
-    <string name="check">Click To Check Root</string>
+    <string name="title">ADB over Wi-Fi</string>
     <string name="settings">Settings</string>
-    <string name="settings_1">ADB Port:</string>
+    <string name="navigate_up">Back</string>
+
+    <!-- Main screen -->
+    <string name="toggle_description">Wireless ADB</string>
+    <string name="status_on">Wireless ADB is on</string>
+    <string name="status_off">Wireless ADB is off</string>
+    <string name="off_message">Turn it on, then run the connect command on your computer.</string>
+    <string name="wifi_off">Connect this phone to Wi-Fi to use wireless ADB.</string>
+    <string name="not_rooted">This phone isn\'t rooted, so the app can\'t start wireless ADB on its own. You can still start it from your computer with a USB cable.</string>
+    <string name="rootless_button">Set up without root</string>
+    <string name="connect_label">Run this on your computer</string>
+    <string name="copy">Copy</string>
+    <string name="copy_description">Copy the connect command</string>
+    <string name="copied">Command copied</string>
+    <string name="address_error">Couldn\'t find this phone\'s Wi-Fi address. Check the Wi-Fi connection and try again.</string>
+    <string name="toggle_error">Couldn\'t change wireless ADB. Check that this app has root access.</string>
+
+    <!-- Settings -->
+    <string name="settings_port">ADB port</string>
+    <string name="settings_port_description">Port wireless ADB listens on</string>
+    <string name="port_helper">Use a port from 1024 to 65535.</string>
+    <string name="port_error">Enter a port from 1024 to 65535.</string>
     <string name="default_port">5555</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
-    <string name="restrictions">Ports between 1-1024 are not allowed!!!</string>
+
+    <!-- Rootless setup -->
+    <string name="rootless">Set up without root</string>
+    <string name="rootless_intro">Without root, start wireless ADB from your computer once over USB. It stays on until the phone restarts.</string>
+    <string name="step_1_title">Turn on USB debugging</string>
+    <string name="step_1_body">Turn on USB debugging in developer options, then connect the phone to your computer with a USB cable.</string>
+    <string name="step_2_title">Switch ADB to Wi-Fi</string>
+    <string name="step_2_body">Run this on your computer. 5555 is the port, and you can pick another one.</string>
+    <string name="step_2_command" translatable="false">adb tcpip 5555</string>
+    <string name="step_3_title">Find the phone\'s IP address</string>
+    <string name="step_3_body">Look in Settings &gt; About phone &gt; Status, or run:</string>
+    <string name="step_3_command" translatable="false">adb shell ip addr show wlan0</string>
+    <string name="step_4_title">Connect over Wi-Fi</string>
+    <string name="step_4_body">Unplug the cable and connect using the phone\'s IP address.</string>
+    <string name="step_4_command" translatable="false">adb connect &lt;phone-ip&gt;:5555</string>
+    <string name="step_5_title">Check the connection</string>
+    <string name="step_5_body">The phone should appear in the list with its IP address.</string>
+    <string name="step_5_command" translatable="false">adb devices</string>
+    <string name="developer_options_button">Open developer options</string>
+    <string name="developer_options_error">Couldn\'t open developer options. Find them in Settings &gt; System.</string>
 </resources>

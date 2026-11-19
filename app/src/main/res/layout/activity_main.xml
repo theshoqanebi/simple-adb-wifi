@@ -1,65 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:background="@color/layout_background"
+	android:background="@color/fog"
+	android:orientation="vertical"
 	android:textDirection="ltr"
 	tools:context="com.theshoqanebi.adbwifi.MainActivity">
 
-	<RelativeLayout
+	<LinearLayout
 		android:id="@+id/header"
 		android:layout_width="match_parent"
-		android:layout_height="@dimen/_44dp"
-		android:background="@color/colorPrimary">
+		android:layout_height="@dimen/_64dp"
+		android:gravity="center_vertical"
+		android:orientation="horizontal"
+		android:paddingStart="@dimen/_24dp"
+		android:paddingEnd="@dimen/_12dp">
 
 		<TextView
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:gravity="center_vertical"
-			android:paddingStart="@dimen/_8dp"
-			android:paddingEnd="@dimen/_8dp"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
 			android:text="@string/title"
-			android:layout_toStartOf="@id/settings"
-			android:textColor="@color/white"
-			android:textSize="16sp"
-			android:textStyle="bold" />
-		<ImageView
-			android:id="@+id/settings"
-			android:layout_width="?actionBarSize"
-			android:layout_height="match_parent"
-			android:src="@drawable/ic_settings"
-			android:padding="@dimen/_4sp"
-			android:layout_alignParentEnd="true" />
-	</RelativeLayout>
+			android:textAppearance="@style/TextAppearance.AdbWifi.Title" />
 
-	<RelativeLayout
+		<ImageButton
+			android:id="@+id/settings"
+			android:layout_width="@dimen/_48dp"
+			android:layout_height="@dimen/_48dp"
+			android:background="?attr/selectableItemBackgroundBorderless"
+			android:contentDescription="@string/settings"
+			android:padding="@dimen/_12dp"
+			android:scaleType="fitCenter"
+			android:src="@drawable/ic_settings"
+			app:tint="@color/ink" />
+	</LinearLayout>
+
+	<ScrollView
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:layout_below="@id/header">
+		android:layout_height="0dp"
+		android:layout_weight="1"
+		android:fillViewport="true">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:paddingStart="@dimen/_24dp"
+			android:paddingTop="@dimen/_24dp"
+			android:paddingEnd="@dimen/_24dp"
+			android:paddingBottom="@dimen/_24dp">
+
+			<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:gravity="center_vertical"
+				android:orientation="horizontal">
+
+				<View
+					android:id="@+id/statusDot"
+					android:layout_width="@dimen/_10dp"
+					android:layout_height="@dimen/_10dp"
+					android:background="@drawable/status_dot" />
+
+				<TextView
+					android:id="@+id/statusText"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="@dimen/_10dp"
+					android:accessibilityLiveRegion="polite"
+					android:text="@string/status_off"
+					android:textAppearance="@style/TextAppearance.AdbWifi.Status" />
+			</LinearLayout>
+
+			<LinearLayout
+				android:id="@+id/connectGroup"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/_20dp"
+				android:orientation="vertical"
+				android:visibility="gone"
+				tools:visibility="visible">
+
+				<TextView
+					android:id="@+id/address"
+					android:layout_width="match_parent"
+					android:layout_height="@dimen/_64dp"
+					android:gravity="center_vertical"
+					android:maxLines="1"
+					android:textAppearance="@style/TextAppearance.AdbWifi.Readout"
+					app:autoSizeMaxTextSize="@dimen/_48sp"
+					app:autoSizeMinTextSize="@dimen/_21sp"
+					app:autoSizeStepGranularity="1sp"
+					app:autoSizeTextType="uniform"
+					tools:text="192.168.0.198" />
+
+				<TextView
+					android:id="@+id/port"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textAppearance="@style/TextAppearance.AdbWifi.Code"
+					android:textColor="@color/slate_text"
+					android:textSize="@dimen/_21sp"
+					tools:text=":5555" />
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/_28dp"
+					android:text="@string/connect_label"
+					android:textAppearance="@style/TextAppearance.AdbWifi.Caption" />
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/_8dp"
+					android:background="@drawable/code_block"
+					android:gravity="center_vertical"
+					android:minHeight="@dimen/_52dp"
+					android:orientation="horizontal"
+					android:paddingStart="@dimen/_14dp"
+					android:paddingEnd="@dimen/_4dp">
+
+					<TextView
+						android:id="@+id/command"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:textAppearance="@style/TextAppearance.AdbWifi.Code"
+						android:textIsSelectable="true"
+						tools:text="adb connect 192.168.0.198:5555" />
+
+					<Button
+						android:id="@+id/copy"
+						style="@style/Widget.Material3.Button.TextButton"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:contentDescription="@string/copy_description"
+						android:text="@string/copy"
+						android:textColor="@color/button_text" />
+				</LinearLayout>
+			</LinearLayout>
+
+			<TextView
+				android:id="@+id/message"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/_16dp"
+				android:accessibilityLiveRegion="polite"
+				android:text="@string/off_message"
+				android:textAppearance="@style/TextAppearance.AdbWifi.Body" />
+
+			<Button
+				android:id="@+id/rootless"
+				style="@style/Widget.Material3.Button.OutlinedButton"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/_16dp"
+				android:text="@string/rootless_button"
+				android:textColor="@color/button_text"
+				android:visibility="gone"
+				tools:visibility="visible" />
+		</LinearLayout>
+	</ScrollView>
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:paddingTop="@dimen/_16dp"
+		android:paddingBottom="@dimen/_40dp">
 
 		<androidx.appcompat.widget.SwitchCompat
-			xmlns:app="http://schemas.android.com/apk/res-auto"
 			android:id="@+id/status"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_centerInParent="true"
-			android:contentDescription="@string/title"
+			android:layout_gravity="center_horizontal"
+			android:contentDescription="@string/toggle_description"
 			android:thumb="@drawable/switch_thumb"
-			app:track="@drawable/switch_track" />
-
-		<TextView
-			android:id="@+id/hint"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_below="@id/status"
-			android:layout_centerHorizontal="true"
-			android:layout_gravity="center"
-			android:layout_marginStart="@dimen/_16dp"
-			android:layout_marginTop="16dp"
-			android:layout_marginEnd="@dimen/_16dp"
-			android:gravity="center"
-			android:text="@string/hint_example"
-			android:textSize="@dimen/_14sp" />
-	</RelativeLayout>
-</RelativeLayout>
+			app:thumbTint="@null"
+			app:track="@drawable/switch_track"
+			app:trackTint="@null" />
+	</FrameLayout>
+</LinearLayout>

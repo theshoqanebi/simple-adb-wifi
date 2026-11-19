@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="fog">#10151F</color>
+	<color name="ink">#E8ECF2</color>
+	<color name="slate_text">#A3ACBD</color>
+	<color name="slate">#5E687A</color>
+	<color name="mist">#222B38</color>
+	<color name="amber">#FFB627</color>
+	<color name="error">#FF6B5E</color>
+	<color name="thumb">#F2F4F7</color>
+</resources>

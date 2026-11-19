@@ -5,21 +5,21 @@
 		<shape android:shape="rectangle">
 			<size android:width="@dimen/_220dp" android:height="@dimen/_110dp" />
 			<corners android:radius="@dimen/_55dp" />
-			<solid android:color="@color/off" />
+			<solid android:color="@color/mist" />
 		</shape>
 	</item>
 	<item android:state_checked="true">
 		<shape android:shape="rectangle">
 			<size android:width="@dimen/_220dp" android:height="@dimen/_110dp" />
 			<corners android:radius="@dimen/_55dp" />
-			<solid android:color="@color/colorPrimary" />
+			<solid android:color="@color/amber" />
 		</shape>
 	</item>
 	<item>
 		<shape android:shape="rectangle">
 			<size android:width="@dimen/_220dp" android:height="@dimen/_110dp" />
 			<corners android:radius="@dimen/_55dp" />
-			<solid android:color="#BDBDBD" />
+			<solid android:color="@color/slate" />
 		</shape>
 	</item>
 </selector>

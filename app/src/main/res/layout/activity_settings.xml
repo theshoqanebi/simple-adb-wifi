@@ -1,91 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/layout_background"
+    android:background="@color/fog"
+    android:orientation="vertical"
     android:textDirection="ltr"
-    tools:context="com.theshoqanebi.adbwifi.MainActivity">
+    tools:context="com.theshoqanebi.adbwifi.SettingsActivity">
 
-    <RelativeLayout
-        android:id="@+id/header"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_44dp"
-        android:background="@color/colorPrimary">
+        android:layout_height="@dimen/_64dp"
+        android:minHeight="@dimen/_64dp"
+        app:navigationContentDescription="@string/navigate_up"
+        app:navigationIcon="?attr/homeAsUpIndicator"
+        app:navigationIconTint="@color/ink"
+        app:title="@string/settings"
+        app:titleTextAppearance="@style/TextAppearance.AdbWifi.Title" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:paddingStart="@dimen/_8dp"
-            android:paddingEnd="@dimen/_8dp"
-            android:text="@string/settings"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-    </RelativeLayout>
-
-    <ScrollView
+    <LinearLayout
+        android:id="@+id/portRow"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/header">
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:minHeight="@dimen/_72dp"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/_24dp"
+        android:paddingTop="@dimen/_12dp"
+        android:paddingEnd="@dimen/_24dp"
+        android:paddingBottom="@dimen/_12dp">
 
-        <RelativeLayout
-            android:id="@+id/content"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:paddingStart="@dimen/_8dp"
-            android:paddingEnd="@dimen/_8dp">
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/settings1"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_4dp"
-                android:layout_marginTop="@dimen/_8dp"
-                android:text="@string/settings_1"
-                android:textSize="@dimen/_12sp"
-                android:textStyle="bold" />
+                android:text="@string/settings_port"
+                android:textAppearance="@style/TextAppearance.AdbWifi.Status" />
 
-            <EditText
-                android:id="@+id/settings1Values"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_38dp"
-                android:layout_below="@id/settings1"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_2dp"
-                android:background="@drawable/port_text"
-                android:cursorVisible="false"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:padding="@dimen/_4dp"
-                android:text="@string/default_port" />
+                android:text="@string/settings_port_description"
+                android:textAppearance="@style/TextAppearance.AdbWifi.Caption" />
+        </LinearLayout>
 
-            <RelativeLayout
-                android:id="@+id/rootChecker"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/settings1Values"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/border">
-
-                <ImageView
-                    android:id="@+id/rootStatusImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_restore" />
-
-                <TextView
-                    android:id="@+id/rootStatusText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/rootStatusImage"
-                    android:fontFamily="casual"
-                    android:gravity="center"
-                    android:text="@string/check"
-                    android:textSize="@dimen/_24sp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
-
-        </RelativeLayout>
-    </ScrollView>
-</RelativeLayout>
+        <TextView
+            android:id="@+id/portValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_16dp"
+            android:textAppearance="@style/TextAppearance.AdbWifi.Code"
+            android:textSize="@dimen/_16sp"
+            tools:text="5555" />
+    </LinearLayout>
+</LinearLayout>

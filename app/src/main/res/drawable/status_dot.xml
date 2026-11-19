@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Live indicator next to the status line; tinted amber when on, slate when off. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+	android:shape="oval">
+	<size android:width="@dimen/_10dp" android:height="@dimen/_10dp" />
+	<solid android:color="@color/slate" />
+</shape>

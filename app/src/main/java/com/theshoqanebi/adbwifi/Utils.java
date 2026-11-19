@@ -3,15 +3,20 @@ package com.theshoqanebi.adbwifi;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
+import android.net.LinkAddress;
+import android.net.LinkProperties;
 import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.net.NetworkInfo.State;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.Inet4Address;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
@@ -32,6 +37,33 @@ public class Utils {
             }
         }
         return false;
+    }
+
+    /**
+     * Returns this phone's IPv4 address on the active Wi-Fi network, or null when there is none.
+     * Reads the network's own configuration, so it works on networks without internet access.
+     */
+    @Nullable
+    public static String getWifiIpAddress(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager == null) {
+            return null;
+        }
+        Network activeNetwork = connectivityManager.getActiveNetwork();
+        NetworkCapabilities capabilities = connectivityManager.getNetworkCapabilities(activeNetwork);
+        if (capabilities == null || !capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+            return null;
+        }
+        LinkProperties linkProperties = connectivityManager.getLinkProperties(activeNetwork);
+        if (linkProperties == null) {
+            return null;
+        }
+        for (LinkAddress linkAddress : linkProperties.getLinkAddresses()) {
+            if (linkAddress.getAddress() instanceof Inet4Address) {
+                return linkAddress.getAddress().getHostAddress();
+            }
+        }
+        return null;
     }
 
     public static boolean getAdbStatus(Context context) {

@@ -1,10 +1,14 @@
 package com.theshoqanebi.adbwifi;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Color;
+import android.content.res.ColorStateList;
 import android.net.wifi.WifiManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 
@@ -14,12 +18,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.google.android.material.color.MaterialColors;
 import com.theshoqanebi.adbwifi.databinding.ActivityMainBinding;
-
-import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.net.Socket;
 
 public class MainActivity extends AppCompatActivity {
     private final WifiStateReceiver wifiStateReceiver = new WifiStateReceiver();
@@ -35,9 +34,6 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        int dynamicColor = MaterialColors.getColor(this, androidx.appcompat.R.attr.colorPrimary, Color.BLACK);
-        getWindow().setStatusBarColor(dynamicColor);
-
         ViewCompat.setOnApplyWindowInsetsListener(binding.getRoot(), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -47,14 +43,16 @@ public class MainActivity extends AppCompatActivity {
         binding.settings.setOnClickListener(v -> {
             startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
         });
+        binding.copy.setOnClickListener(v -> copyCommand());
 
         if (!isRooted) {
-            binding.hint.setOnClickListener(v -> {
+            binding.rootless.setOnClickListener(v -> {
                 startActivity(new Intent(getApplicationContext(), RootlessActivity.class));
             });
-            binding.hint.setText(getString(R.string.rootless_error));
-            binding.hint.setTextColor(getColor(R.color.colorPrimary));
-            binding.status.setEnabled(false);
+            binding.rootless.setVisibility(View.VISIBLE);
+            binding.message.setText(R.string.not_rooted);
+            // Without root the switch can never work, so leave only the rootless path.
+            binding.status.setVisibility(View.GONE);
             return;
         }
 
@@ -73,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure() {
-                showMessage(R.string.error_message);
+                showMessage(R.string.toggle_error);
             }
         });
         registerReceiver(wifiStateReceiver, new IntentFilter(WifiManager.SUPPLICANT_CONNECTION_CHANGE_ACTION));
@@ -99,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
     private void lockToggle() {
         Utils.setAdbWifiStatus(false, getApplicationContext());
         setToggleStatus(false);
-        binding.hint.setText(R.string.wifi_off);
+        binding.message.setText(R.string.wifi_off);
         binding.status.setEnabled(false);
     }
 
@@ -108,19 +106,39 @@ public class MainActivity extends AppCompatActivity {
         updatingToggle = true;
         binding.status.setChecked(status);
         updatingToggle = false;
+        binding.statusText.setText(status ? R.string.status_on : R.string.status_off);
+        ViewCompat.setBackgroundTintList(binding.statusDot,
+                ColorStateList.valueOf(getColor(status ? R.color.amber : R.color.slate)));
         if (!status) {
-            binding.hint.setText("");
+            binding.connectGroup.setVisibility(View.GONE);
+            binding.message.setText(R.string.off_message);
+            binding.message.setVisibility(View.VISIBLE);
         } else {
-            new Thread(() -> {
-                try (Socket socket = new Socket()) {
-                    socket.connect(new InetSocketAddress("8.8.8.8", 80));
-                    String ip = socket.getLocalAddress().toString();
-                    String hint = "adb connect " + ip.substring(1) + ":" + Utils.DEFAULT_PORT;
-                    MainActivity.this.runOnUiThread(() -> binding.hint.setText(hint));
-                } catch (IOException exception) {
-                    MainActivity.this.runOnUiThread(() -> showMessage(R.string.error_message));
-                }
-            }).start();
+            String ip = Utils.getWifiIpAddress(getApplicationContext());
+            if (ip == null) {
+                binding.connectGroup.setVisibility(View.GONE);
+                binding.message.setText(R.string.address_error);
+                binding.message.setVisibility(View.VISIBLE);
+            } else {
+                showAddress(ip, Utils.DEFAULT_PORT);
+            }
+        }
+    }
+
+    private void showAddress(String ip, int port) {
+        binding.address.setText(ip);
+        binding.port.setText(":" + port);
+        binding.command.setText("adb connect " + ip + ":" + port);
+        binding.connectGroup.setVisibility(View.VISIBLE);
+        binding.message.setVisibility(View.GONE);
+    }
+
+    private void copyCommand() {
+        ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+        clipboard.setPrimaryClip(ClipData.newPlainText(getString(R.string.title), binding.command.getText()));
+        // Android 13 and newer confirm copies with their own system UI.
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+            showMessage(R.string.copied);
         }
     }
 
@@ -138,15 +156,9 @@ public class MainActivity extends AppCompatActivity {
                 boolean ret = Utils.setAdbWifiStatus(isChecked, getApplicationContext());
                 if (ret) {
                     setToggleStatus(isChecked);
-
-                    if (toggleStatus) {
-                        showMessage(R.string.service_started);
-                    } else {
-                        showMessage(R.string.service_stoped);
-                    }
                 } else {
                     setToggleStatus(toggleStatus);
-                    showMessage(R.string.error_message);
+                    showMessage(R.string.toggle_error);
                 }
             } else {
                 lockToggle();
