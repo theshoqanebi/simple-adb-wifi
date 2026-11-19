@@ -10,6 +10,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.theshoqanebi.adbwifi.databinding.ActivitySettingsBinding;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -37,9 +38,29 @@ public class SettingsActivity extends AppCompatActivity {
             portDialog.show();
             portDialog.setOnDismissListener(dialog -> viewPrepare());
         });
+        binding.themeRow.setOnClickListener(v -> showThemePicker());
     }
 
     private void viewPrepare() {
         binding.portValue.setText(preferences.getString("port", "5555"));
+        binding.themeValue.setText(ThemeSettings.LABELS[ThemeSettings.get(this)]);
+    }
+
+    private void showThemePicker() {
+        String[] labels = new String[ThemeSettings.LABELS.length];
+        for (int i = 0; i < labels.length; i++) {
+            labels[i] = getString(ThemeSettings.LABELS[i]);
+        }
+        new MaterialAlertDialogBuilder(this)
+                .setTitle(R.string.settings_theme)
+                .setSingleChoiceItems(labels, ThemeSettings.get(this), (dialog, which) -> {
+                    dialog.dismiss();
+                    if (which != ThemeSettings.get(this)) {
+                        // Recreates this screen in the chosen theme.
+                        ThemeSettings.set(this, which);
+                    }
+                })
+                .setNegativeButton(R.string.cancel, null)
+                .show();
     }
 }

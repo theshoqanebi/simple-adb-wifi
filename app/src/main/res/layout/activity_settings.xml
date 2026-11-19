@@ -64,4 +64,48 @@
             android:textSize="@dimen/_16sp"
             tools:text="5555" />
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/themeRow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:minHeight="@dimen/_72dp"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/_24dp"
+        android:paddingTop="@dimen/_12dp"
+        android:paddingEnd="@dimen/_24dp"
+        android:paddingBottom="@dimen/_12dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_theme"
+                android:textAppearance="@style/TextAppearance.AdbWifi.Status" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2dp"
+                android:text="@string/settings_theme_description"
+                android:textAppearance="@style/TextAppearance.AdbWifi.Caption" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/themeValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_16dp"
+            android:textAppearance="@style/TextAppearance.AdbWifi.Body"
+            tools:text="@string/theme_system" />
+    </LinearLayout>
 </LinearLayout>

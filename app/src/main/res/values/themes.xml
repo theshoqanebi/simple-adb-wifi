@@ -3,8 +3,9 @@
     <style name="Base.Theme.AdbWifi" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/ink</item>
         <item name="colorOnPrimary">@color/fog</item>
-        <item name="colorSecondary">@color/amber</item>
-        <item name="colorOnSecondary">@color/ink</item>
+        <!-- Amber is reserved for the live state, so controls such as radio buttons stay ink. -->
+        <item name="colorSecondary">@color/ink</item>
+        <item name="colorOnSecondary">@color/fog</item>
         <item name="colorError">@color/error</item>
         <item name="colorSurface">@color/fog</item>
         <item name="colorOnSurface">@color/ink</item>
