@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
     private boolean toggleStatus = false;
     private boolean updatingToggle = false;
+    private boolean receiverRegistered = false;
     boolean isRooted = Utils.isDeviceRooted();
 
     @Override
@@ -75,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         registerReceiver(wifiStateReceiver, new IntentFilter(WifiManager.SUPPLICANT_CONNECTION_CHANGE_ACTION));
+        receiverRegistered = true;
 
         if (Utils.isWifiConnected(getApplicationContext())) {
             resetToggleStatus();
@@ -85,7 +87,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onDestroy() {
-        unregisterReceiver(wifiStateReceiver);
+        // Without root the receiver is never registered, and unregistering it would throw.
+        if (receiverRegistered) {
+            unregisterReceiver(wifiStateReceiver);
+            receiverRegistered = false;
+        }
         super.onDestroy();
     }
 
