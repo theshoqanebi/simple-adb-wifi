@@ -1,34 +1,37 @@
 plugins {
-    id 'com.android.application'
+    alias(libs.plugins.android.application)
 }
 
 android {
-    namespace "com.theshoqanebi.adbwifi"
-    compileSdkVersion 36
-    defaultConfig {
-        applicationId "com.theshoqanebi.adbwifi"
-        minSdk 23
-        targetSdk 36
-        versionCode 2
-        versionName "1.1"
+    namespace = "com.theshoqanebi.adbwifi"
+    compileSdk = 36
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    defaultConfig {
+        applicationId = "com.theshoqanebi.adbwifi"
+        minSdk = 23
+        targetSdk = 36
+        versionCode = 2
+        versionName = "1.1"
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            // R8: shrink, optimize and obfuscate code, and strip unused resources.
+            minifyEnabled = true
+            shrinkResources = true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     buildFeatures {
-        viewBinding true
+        viewBinding = true
     }
 }
 
@@ -36,7 +39,6 @@ dependencies {
     implementation libs.appcompat
     implementation libs.material
     implementation libs.activity
-    implementation libs.constraintlayout
 
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
